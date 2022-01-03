@@ -1,6 +1,3 @@
-import IntNode
-
-
 # A class representing linked-lists.
 
 class LinkedList:
