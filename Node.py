@@ -1,4 +1,4 @@
-# The next class represents a Node of a linked-list, used primarily in the Linked-List class.
+# The next class represents a Node of a linked-list, used primarily in the LinkedList class.
 
 class Node:
     # A default-ive constructor for a Node object, setting up its value (val) and its following Node (next).
