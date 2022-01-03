@@ -13,4 +13,5 @@ class LinkedList:
         return type(self.head) is None
 
     # A getter function for the head.
-    def getHead(self):
+    def get_head(self):
+        return self.head
