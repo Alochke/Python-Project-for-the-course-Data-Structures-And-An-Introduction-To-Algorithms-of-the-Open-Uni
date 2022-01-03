@@ -12,7 +12,8 @@ def main():
           "\n 3 - for un-sorted, disjointed lists.")
     MergeHeap.MergeHeap.set_mode(input())
     clear_console()
-    print("...")
+    print("Pleas chose one of the following commands: \n"
+          "MakeHeap, MakeHeapFromList, Insert [int], ExtractMin, Minimum, ExtractMin, Union, FromTxt")
 
 
 # A function which clears the console.
