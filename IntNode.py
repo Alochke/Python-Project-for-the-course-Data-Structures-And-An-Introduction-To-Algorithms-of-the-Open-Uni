@@ -1,6 +1,6 @@
-# The next class represents a Node of a linked-list, used primarily in the LinkedList class.
+# The next class represents a Node of a linked-list, used in the LinkedList class.
 
-class Node:
+class IntNode:
     # A default-ive constructor for a Node object, setting up its value (val) and its following Node (next).
     def __init__(self, to_be_val, to_be_next):
         self.next = to_be_next

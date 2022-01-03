@@ -1,13 +1,16 @@
-import Node
+import IntNode
 
+
+# A class representing linked-lists.
 
 class LinkedList:
-
+    # A default-ive constructor, expecting an IntNode parameter to be set as self's head.
     def __init__(self, to_be_head):
-        self.head = Node.Node(to_be_head, None)
+        self.head = to_be_head
 
-    def set_head(self, to_be_head):
-        self.head = Node.Node(to_be_head, self.head)
+    # Returns true iff self is empty.
+    def empty(self):
+        return type(self.head) is None
 
-    def get_head(self):
-        return self.head
+    # A getter function for the head.
+    def getHead(self):
