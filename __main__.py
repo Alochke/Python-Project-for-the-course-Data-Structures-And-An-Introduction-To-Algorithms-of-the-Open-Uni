@@ -24,4 +24,5 @@ def clear_console():
 
 
 # The command below initiates the program.
-main()
+if __name__ == "__main__":
+    main()
