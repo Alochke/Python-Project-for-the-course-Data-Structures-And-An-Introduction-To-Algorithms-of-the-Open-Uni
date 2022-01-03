@@ -11,7 +11,7 @@ def main():
     print("Please decide in which form are you to input the data \n 1 - for sorted lists \n 2 - for un-sorted lists "
           "\n 3 - for un-sorted, disjointed lists.")
     MergeHeap.MergeHeap.set_mode(input())
-    os.system('cls')
+    clear_console()
     print("...")
 
 
