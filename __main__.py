@@ -8,7 +8,7 @@ class.
 
 import MergeHeap
 import os
-
+import time
 
 def execute(command, txt_mode, wait, *args):
     """
@@ -30,7 +30,7 @@ def execute(command, txt_mode, wait, *args):
               r"(for example:C:\Users\Alon\PycharmProjects\test.txt)")
         txt = open(input()).readlines()
         for i in range(len(txt)):
-            txt[i] = txt[i][0: len(txt) - 1]
+            txt[i] = txt[i][0: len(txt[i]) - 1]
         txt_mode = True
 
     if command == "MakeHeapFromList":
@@ -55,12 +55,7 @@ def execute(command, txt_mode, wait, *args):
         execute(input(), False, False, *args)
 
     if wait:
-        sleep(5)
-
-
-
-
-
+        time.sleep(5)
 
 
 def clear_console():

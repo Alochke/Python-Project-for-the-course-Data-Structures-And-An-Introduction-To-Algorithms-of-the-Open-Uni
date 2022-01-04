@@ -27,4 +27,4 @@ class LinkedList:
         while temp is not None:
             print(temp.get_val() + " --> ")
             temp = temp.get_next()
-        print(None)
+        print("None")
