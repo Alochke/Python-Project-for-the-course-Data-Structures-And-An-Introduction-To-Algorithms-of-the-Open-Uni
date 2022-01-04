@@ -8,36 +8,59 @@ class.
 
 import MergeHeap
 import os
-import sys
-from colorama import *
 
 
-def execute(command, *args):
+def execute(command, txt_mode, wait, *args):
     """
     Execute the command given as parameter, while using a tuple (args) that contains all the created MergeHeaps,
     in chronological order from left to right.
     """
-    clear_console()
+
+    if command[0] == "I":
+        # Insert was chosen.
+        args[0].insert(int(command[7]))
+
+    if command == "Union":
+        temp_list = list(args)
+        temp_list[1].union(temp_list.pop())
+        args = tuple(temp_list)
 
     if command == "FromTxt":
-        pass
+        print("Please type the path to the location of the txt file you wish to run commands from. \n"
+              r"(for example:C:\Users\Alon\PycharmProjects\test.txt)")
+        txt = open(input()).readlines()
+        for i in range(len(txt)):
+            txt[i] = txt[i][0: len(txt) - 1]
+        txt_mode = True
 
     if command == "MakeHeapFromList":
         pass
 
-    print("Pleas chose one of the following commands: \n"
-          "MakeHeap, MakeHeapFromList, Insert [int], ExtractMin, Minimum, Union, FromTxt")
-
     if command == "MakeHeap":
-        execute(input(), *args, MergeHeap.MergeHeap(None))
-    if command[0] == "I":
-        pass
+        temp_list = list(args)
+        temp_list.append(MergeHeap.MergeHeap)
+        args = tuple(temp_list)
+
     if command == "ExtractMin":
-        pass
+        args[0].extract_min()
+
+    clear_console()
+    print_iterable(args)
+
     if command == "Minimum":
-        pass
-    # If none of the if statements above were entered then command == "Union".
-    pass
+        print("The minimum is: " + args[0].get_head() + "/n")
+
+    if not txt_mode:
+        guide_user()
+        execute(input(), False, False, *args)
+
+    if wait:
+        sleep(5)
+
+
+
+
+
 
 
 def clear_console():
@@ -48,18 +71,24 @@ def clear_console():
     os.system(command)
 
 
-def print_pos(x, y, text_to_print):
-    """Prints to (x,y) position the text given as parameter to cmd. Maybe useful in the future."""
-    sys.stdout.write("\x1b[%d;%df%s" % (x, y, text_to_print))
-    sys.stdout.flush()
+def print_iterable(iterable):
+    """Print the given iterable object constructed of MergeHeaps."""
+    for heap in iterable:
+        heap.print_list()
+        print("\n")
+    print("\n")
+
+
+def guide_user():
+    """Encourage the user to give a command and show the formats of the commands."""
+    print("Pleas chose one of the following commands: \n" +
+          "MakeHeap, MakeHeapFromList, Insert [int], ExtractMin, Minimum, Union, FromTxt")
 
 
 if __name__ == "__main__":
-    init()
     print("Please decide in which form are you to input the data \n 1 - for sorted lists \n 2 - for un-sorted lists "
           "\n 3 - for un-sorted, disjointed lists.")
     MergeHeap.MergeHeap.set_mode(input())
     clear_console()
-    print("Pleas chose one of the following commands: \n"
-          "MakeHeap, MakeHeapFromList, Insert [int], ExtractMin, Minimum, Union, FromTxt")
-    execute(input())
+    guide_user()
+    execute(input(), False, False)

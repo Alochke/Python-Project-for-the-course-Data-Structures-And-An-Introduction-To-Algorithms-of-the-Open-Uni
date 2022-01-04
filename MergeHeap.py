@@ -20,3 +20,15 @@ class MergeHeap(LinkedList.LinkedList):
     def set_mode(cls, to_be_mode):
         """Set cls.mode to to_be_mode."""
         cls.mode = to_be_mode
+
+    def insert(self, inserted):
+        """Inserts inserted to self."""
+        pass
+
+    def union(self, merge_heap):
+        """Unions self and merge_heap and saves the result in self."""
+        pass
+
+    def extract_min(self):
+        """Extracts self.head without returning it while keeping self a mergeable heap by definition."""
+        pass
