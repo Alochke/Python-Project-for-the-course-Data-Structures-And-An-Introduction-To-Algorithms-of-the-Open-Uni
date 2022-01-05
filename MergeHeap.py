@@ -40,19 +40,28 @@ class MergeHeap(LinkedList.LinkedList):
             if temp.get_val() > inserted:
                 self.head = IntNode.IntNode(inserted, temp)
             else:
-                while (temp.get_next() is not None) and (temp.get_next().getval() <= inserted):  # Searches correct
-                    temp = temp.get_next()
-                Node = IntNode.IntNode(inserted, temp.get_next())
-                temp.set_next(Node)  # Puts inserted to correct position.
-                if temp.get_next() is None:
-                    self.tail = Node
+                if MergeHeap.mode == 1 or self.sub_heaps == []:
+                    while (temp.get_next() is not None) and (temp.get_next().getval() <= inserted):  # Searches correct
+                        temp = temp.get_next()
+                    Node = IntNode.IntNode(inserted, temp.get_next())
+                    temp.set_next(Node)  # Puts inserted to correct position.
+                    if Node.get_next() is None:
+                        self.tail = Node
+                else:
+                    endnode = self.sub_heaps[1]
+                    while (temp.get_next() != endnode) and (temp.get_next().getval() <= inserted):  # Searches correct
+                        temp = temp.get_next()
+                    Node = IntNode.IntNode(inserted, temp.get_next())
+                    temp.set_next(Node)  # Puts inserted to correct position.
+
 
     def union(self, merge_heap):
         """Unions self and merge_heap and saves the result in self."""
         self.sub_heaps.append(self.head, merge_heap.head)
         self.tail.setNext(merge_heap)
-
+        self.tail = merge_heap.tail
 
     def extract_min(self):
         """Extracts self.head without returning it while keeping self a mergeable heap by definition."""
-        self.head = self.head.get_next()
+        self.head = self.head.get_next()\
+
