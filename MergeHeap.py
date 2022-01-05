@@ -16,6 +16,16 @@ class MergeHeap(LinkedList.LinkedList):
     """
     mode = None
 
+    def __init__(self, to_be_head):
+        """
+        Create a new MergeHeap and if mode suggests doing so, add to the constructed the appropriate instance
+        variables.
+        """
+        super().__init__(to_be_head)
+        if MergeHeap.mode != 1:
+            self.tail = to_be_head
+            self.sub_heaps = []
+
     @classmethod
     def set_mode(cls, to_be_mode):
         """Set cls.mode to to_be_mode."""
