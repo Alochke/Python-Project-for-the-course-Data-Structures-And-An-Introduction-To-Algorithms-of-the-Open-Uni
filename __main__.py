@@ -38,7 +38,7 @@ def execute(command, txt_mode, wait, *args):
 
     if command == "MakeHeap":
         temp_list = list(args)
-        temp_list.append(MergeHeap.MergeHeap)
+        temp_list.append(MergeHeap.MergeHeap())
         args = tuple(temp_list)
 
     if command == "ExtractMin":
@@ -56,6 +56,7 @@ def execute(command, txt_mode, wait, *args):
 
     if wait:
         time.sleep(5)
+
 
 
 def clear_console():
