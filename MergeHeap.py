@@ -22,9 +22,8 @@ class MergeHeap(LinkedList.LinkedList):
         variables.
         """
         super().__init__(to_be_head)
-        if MergeHeap.mode != 1:
-            self.tail = to_be_head
-            self.sub_heaps = []
+        self.tail = to_be_head
+        self.sub_heaps = []
 
     @classmethod
     def set_mode(cls, to_be_mode):
@@ -36,15 +35,23 @@ class MergeHeap(LinkedList.LinkedList):
         temp = self.head
         if temp is None:
             self.head = IntNode.IntNode(inserted, None)
-        while (temp.get_next() is not None) and (not temp.get_next().getval() <= inserted):  # Searches correct
-            # position for
-            # inserted.
-            temp = temp.get_next()
-        temp.set_next(IntNode.IntNode(inserted, temp.get_next()))  # Puts inserted to correct position.
+            self.tail = self.head
+        else:
+            if temp.get_val() > inserted:
+                self.head = IntNode.IntNode(inserted, temp)
+            else:
+                while (temp.get_next() is not None) and (temp.get_next().getval() <= inserted):  # Searches correct
+                    temp = temp.get_next()
+                Node = IntNode.IntNode(inserted, temp.get_next())
+                temp.set_next(Node)  # Puts inserted to correct position.
+                if temp.get_next() is None:
+                    self.tail = Node
 
     def union(self, merge_heap):
         """Unions self and merge_heap and saves the result in self."""
-        pass
+        self.sub_heaps.append(self.head, merge_heap.head)
+        self.tail.setNext(merge_heap)
+
 
     def extract_min(self):
         """Extracts self.head without returning it while keeping self a mergeable heap by definition."""
