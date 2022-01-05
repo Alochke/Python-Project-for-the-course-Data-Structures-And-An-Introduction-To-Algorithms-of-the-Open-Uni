@@ -5,15 +5,21 @@ commands.
 Also, The module stores the functions which the main function utilizes but don't belong logically to a certain
 class.
 """
-
+from time import sleep
 import MergeHeap
 import os
 
 
-def execute(command, txt_mode, wait, *args):
+def execute(command, txt_mode, wait, command_list, *args):
     """
-    Execute the command given as parameter, while using a tuple (args) that contains all the created MergeHeaps,
-    in chronological order from left to right.
+    Execute the command given as parameter, while using:
+    args - a tuple that contains all the created MergeHeaps, in chronological order from left to right,
+    txt_mode - a boolean which indicates if reading commands from a command_list
+    wait - a boolean that changes execution only when txt_mode == true and if true, shall wait between printing
+    of the MergeHeaps, showing changes made by the commands given in chronological order.
+    commands_list - irreverent when txt_mode == false, else wise, a list containing the commands left to be
+    executed in chronological order, from left to right,
+
     """
 
     if command[0] == "I":
@@ -30,11 +36,8 @@ def execute(command, txt_mode, wait, *args):
               r"(for example:C:\Users\Alon\PycharmProjects\test.txt)")
         txt = open(input()).readlines()
         for i in range(len(txt)):
-            txt[i] = txt[i][0: len(txt) - 1]
-        txt_mode = True
-
-    if command == "MakeHeapFromList":
-        pass
+            txt[i] = txt[i][0: len(txt[i]) - 1]
+        execute(txt.pop(), True, True, txt, *args)
 
     if command == "MakeHeap":
         temp_list = list(args)
@@ -44,23 +47,22 @@ def execute(command, txt_mode, wait, *args):
     if command == "ExtractMin":
         args[0].extract_min()
 
-    clear_console()
-    print_iterable(args)
-
     if command == "Minimum":
         print("The minimum is: " + args[0].get_head() + "/n")
 
+    clear_console()
+    print_iterable(args)
+
     if not txt_mode:
         guide_user()
-        execute(input(), False, False, *args)
+        execute(input(), False, False, None, *args)
 
     if wait:
         sleep(5)
+        # Nitay, I leave the skip related dialog and code here for you because you said you have a good idea
+        # for implementation.
 
-
-
-
-
+    execute(command_list.pop(), len(command_list) == 0, wait, command_list, *args)
 
 
 def clear_console():
@@ -82,7 +84,7 @@ def print_iterable(iterable):
 def guide_user():
     """Encourage the user to give a command and show the formats of the commands."""
     print("Pleas chose one of the following commands: \n" +
-          "MakeHeap, MakeHeapFromList, Insert [int], ExtractMin, Minimum, Union, FromTxt")
+          "MakeHeap, Insert [int], ExtractMin, Minimum, Union, FromTxt")
 
 
 if __name__ == "__main__":
@@ -91,4 +93,4 @@ if __name__ == "__main__":
     MergeHeap.MergeHeap.set_mode(input())
     clear_console()
     guide_user()
-    execute(input(), False, False)
+    execute(input(), False, False, None)
