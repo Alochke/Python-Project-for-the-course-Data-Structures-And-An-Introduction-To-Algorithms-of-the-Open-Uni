@@ -1,7 +1,7 @@
 """
 Stores the code for the MergeHeap class.
 """
-
+import IntNode
 import LinkedList
 
 
@@ -23,7 +23,10 @@ class MergeHeap(LinkedList.LinkedList):
 
     def insert(self, inserted):
         """Inserts inserted to self."""
-        pass
+        temp = self.head
+        while not temp.get_next().getval() <= inserted:  # Searches correct position for inserted.
+            temp = temp.get_next()
+        temp.set_next(IntNode.IntNode(inserted, temp.get_next()))  # Puts inserted to correct position.
 
     def union(self, merge_heap):
         """Unions self and merge_heap and saves the result in self."""
