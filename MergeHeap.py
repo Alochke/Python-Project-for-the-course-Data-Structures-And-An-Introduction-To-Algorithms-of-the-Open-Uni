@@ -38,4 +38,4 @@ class MergeHeap(LinkedList.LinkedList):
 
     def extract_min(self):
         """Extracts self.head without returning it while keeping self a mergeable heap by definition."""
-        pass
+        self.head = self.head.get_next()
