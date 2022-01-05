@@ -24,7 +24,11 @@ class MergeHeap(LinkedList.LinkedList):
     def insert(self, inserted):
         """Inserts inserted to self."""
         temp = self.head
-        while not temp.get_next().getval() <= inserted:  # Searches correct position for inserted.
+        if temp is None:
+            self.head = IntNode.IntNode(inserted, None)
+        while (temp.get_next() is not None) and (not temp.get_next().getval() <= inserted):  # Searches correct
+            # position for
+            # inserted.
             temp = temp.get_next()
         temp.set_next(IntNode.IntNode(inserted, temp.get_next()))  # Puts inserted to correct position.
 

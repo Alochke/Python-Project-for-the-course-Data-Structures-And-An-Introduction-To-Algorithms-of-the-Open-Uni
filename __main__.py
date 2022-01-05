@@ -24,7 +24,7 @@ def execute(command, txt_mode, wait, command_list, *args):
 
     if command[0] == "I":
         # Insert was chosen.
-        args[0].insert(int(command[7]))
+        args[0].insert(int(command[7: len(command)]))
 
     if command == "Union":
         temp_list = list(args)
@@ -48,7 +48,7 @@ def execute(command, txt_mode, wait, command_list, *args):
         args[0].extract_min()
 
     if command == "Minimum":
-        print("The minimum is: " + args[0].get_head() + "/n")
+        print("The minimum is: " + args[0].get_head().get_val() + "/n")
 
     clear_console()
     print_iterable(args)
