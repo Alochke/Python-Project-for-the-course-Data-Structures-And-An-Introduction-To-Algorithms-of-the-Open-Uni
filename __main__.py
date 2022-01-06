@@ -18,17 +18,20 @@ def execute(command, txt_mode, wait, command_list, *args):
     wait - a boolean that changes execution only when txt_mode == true and if true, shall wait between printing
     of the MergeHeaps, showing changes made by the commands given in chronological order.
     commands_list - irreverent when txt_mode == false, else wise, a list containing the commands left to be
-    executed in chronological order, from left to right,
+    executed in chronological order, from left to right.
 
     """
 
     if command[0] == "I":
         # Insert was chosen.
-        args[0].insert(int(command[7: len(command)]))
+        args[args].insert(int(command[7: len(command)]))
 
     if command == "Union":
+        # Note: List constructor take O(מ), but so does linear printing and Shay Tavor wrote in the forums
+        # that the second of both is valid and the algorithms by in MergeHeap.py support our claims for
+        # time-complexity and this should be explained.
         temp_list = list(args)
-        temp_list[1].union(temp_list.pop())
+        temp_list[len(temp_list) - 2].union(temp_list.pop())
         args = tuple(temp_list)
 
     if command == "FromTxt":
@@ -37,11 +40,12 @@ def execute(command, txt_mode, wait, command_list, *args):
         txt = open(input()).readlines()
         for i in range(len(txt)):
             txt[i] = txt[i][0: len(txt[i]) - 1]
+        txt.reverse()
         execute(txt.pop(), True, True, txt, *args)
 
     if command == "MakeHeap":
         temp_list = list(args)
-        temp_list.append(MergeHeap.MergeHeap)
+        temp_list.append(MergeHeap.MergeHeap(None))
         args = tuple(temp_list)
 
     if command == "ExtractMin":
