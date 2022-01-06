@@ -1,7 +1,6 @@
 """
 Stores the code for the LinkedList class.
 """
-import IntNode
 
 
 class LinkedList:
@@ -20,6 +19,10 @@ class LinkedList:
     def get_head(self):
         """Return self.head."""
         return self.head
+
+    def set_head(self, to_be_head):
+        """Sets self.head to to_be_head"""
+        self.head = to_be_head
 
     def print_list(self):
         """Print self."""
