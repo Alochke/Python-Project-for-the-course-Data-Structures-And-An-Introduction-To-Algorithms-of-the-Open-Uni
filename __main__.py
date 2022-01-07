@@ -64,9 +64,8 @@ def execute(command, txt_mode, wait, command_list, *args):
         execute(input(), False, False, None, *args)
 
     if wait:
-        # Nitay, I leave the skip related dialog and code here for you because you said you have a good idea
-        # for implementation.
-        pass
+        input("Press Enter to continue...")
+
 
     execute(command_list.pop(), len(command_list) != 0, wait, command_list, *args)
 

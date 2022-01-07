@@ -3,7 +3,7 @@ Stores the code for the MergeHeap class.
 """
 import IntNode
 import LinkedList
-
+import math
 
 class MergeHeap(LinkedList.LinkedList):
     """
@@ -22,6 +22,8 @@ class MergeHeap(LinkedList.LinkedList):
         variables.
         """
         super().__init__(to_be_head)
+        self.values = [[self.head.get_value()] if self.head is not None else []]
+        #self.min = self.head.get_value() if self.head is not None else Integer.MIN_VALUE
         self.tail = to_be_head
         if MergeHeap.mode != 1:
             self.sub_heaps = []
@@ -33,11 +35,26 @@ class MergeHeap(LinkedList.LinkedList):
 
     def insert(self, inserted):
         """Inserts inserted to self."""
+        count = 0
         temp = self.head
+        if MergeHeap.mode == 3:
+            for arr in self.values:
+                print(arr)
+                low = 0
+                high = len(arr) - 1
+                while (low <= high):
+                    mid = (high + low) // 2
+                    if arr[mid] < inserted:
+                        low = mid + 1
+                    elif arr[mid] > inserted:
+                        high = mid - 1
+                    else:
+                        return
         if temp is None:
             # Self is empty.
             self.head = IntNode.IntNode(inserted, None)
             self.tail = self.head
+            self.values[0].append(inserted)
         else:
             if temp.get_val() >= inserted:
                 # Self can be placed as head.
@@ -48,6 +65,7 @@ class MergeHeap(LinkedList.LinkedList):
                 if MergeHeap.mode == 1 or self.sub_heaps == []:
                     while (temp.get_next() is not None) and (temp.get_next().get_val() < inserted):
                         # Searches correct insert position.
+                        count += 1
                         temp = temp.get_next()
                     node = IntNode.IntNode(inserted, temp.get_next())
                     temp.set_next(node)  # Puts inserted to correct position (in the last two lines).
@@ -56,14 +74,17 @@ class MergeHeap(LinkedList.LinkedList):
                 else:
                     # Else, put inserted to a valid place in the first sub-heap.
                     end_node = self.sub_heaps[1]
-                    while (temp != end_node) and (temp.get_next().getval() < inserted):
+                    while (temp.get_next() != end_node) and (temp.get_next().getval() < inserted):
                         # Searches correct place.
+                        count += 1
                         temp = temp.get_next()
                     node = IntNode.IntNode(inserted, temp.get_next())
                     temp.set_next(node)  # Puts inserted to correct position.
                     if temp == end_node:
                         self.sub_heaps[1] = node
                         self.tail = node
+            self.values[0][0: count + 1] += [inserted] + [self.values[0][count + 1:]]
+
 
     def union(self, merge_heap):
         """Unions self and merge_heap and saves the result in self."""
