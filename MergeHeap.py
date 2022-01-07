@@ -121,8 +121,8 @@ class MergeHeap(LinkedList.LinkedList):
             self.head = self.head.get_next()
         else:
             min = len(self.sub_heaps) - 1
-            for i in range((len(self.sub_heaps) - 1) / 2):
-                if self.sub_heaps[i * 2].get_val() < min:
+            for i in range(int((len(self.sub_heaps) - 1) / 2)):
+                if self.sub_heaps[i * 2].get_val() < self.sub_heaps[min].get_val():
                     min = i
             if self.sub_heaps[min] == self.get_head():
                 # Correction, if needed, of self.get_head().
