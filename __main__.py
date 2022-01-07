@@ -27,7 +27,7 @@ def execute(command, txt_mode, wait, command_list, *args):
         args[len(args) - 1].insert(int(command[7: len(command)]))
 
     if command == "Union":
-        # Note: List constructor take O(מ), but so does linear printing and Shay Tavor wrote in the forums
+        # Note: List constructor take O(n), but so does linear printing and Shay Tavor wrote in the forums
         # that the second of both is valid and the algorithms by in MergeHeap.py support our claims for
         # time-complexity and this should be explained.
         temp_list = list(args)
@@ -38,7 +38,7 @@ def execute(command, txt_mode, wait, command_list, *args):
         print("Please type the path to the location of the txt file you wish to run commands from. \n"
               r"(for example:C:\Users\Alon\PycharmProjects\commands)")
         txt = open(input()).readlines()
-        for i in range(len(txt) - 2):
+        for i in range(len(txt) - 1):
             # Last line is saved to txt priorly to the loop without "/n"
             txt[i] = txt[i][0: len(txt[i]) - 1]
         txt.reverse()
@@ -64,7 +64,7 @@ def execute(command, txt_mode, wait, command_list, *args):
         execute(input(), False, False, None, *args)
 
     if wait:
-        input("Press Enter to continue...")
+        pass
 
 
     execute(command_list.pop(), len(command_list) != 0, wait, command_list, *args)

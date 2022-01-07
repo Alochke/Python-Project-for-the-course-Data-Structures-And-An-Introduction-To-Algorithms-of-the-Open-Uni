@@ -1,9 +1,10 @@
 """
 Stores the code for the MergeHeap class.
 """
-import IntNode
+import Node
 import LinkedList
-import math
+import sys
+
 
 class MergeHeap(LinkedList.LinkedList):
     """
@@ -15,6 +16,7 @@ class MergeHeap(LinkedList.LinkedList):
     The value 3 is for un-sorted, disjointed lists.
     """
     mode = None
+    values = []
 
     def __init__(self, to_be_head):
         """
@@ -22,11 +24,11 @@ class MergeHeap(LinkedList.LinkedList):
         variables.
         """
         super().__init__(to_be_head)
-        self.values = [[self.head.get_value()] if self.head is not None else []]
-        #self.min = self.head.get_value() if self.head is not None else Integer.MIN_VALUE
-        self.tail = to_be_head
         if MergeHeap.mode != 1:
-            self.sub_heaps = []
+            self.min = self.get_head().get_val() if to_be_head is not None else sys.maxsize
+            if to_be_head is not None:
+                MergeHeap.values.append([self.head])
+            self.num_of_sub_heaps = 1
 
     @classmethod
     def set_mode(cls, to_be_mode):
@@ -38,53 +40,59 @@ class MergeHeap(LinkedList.LinkedList):
         count = 0
         temp = self.head
         if MergeHeap.mode == 3:
-            for arr in self.values:
-                print(arr)
+            i = 0
+            while i < len(MergeHeap.values) - self.num_of_sub_heaps:
                 low = 0
-                high = len(arr) - 1
-                while (low <= high):
+                high = len(MergeHeap.values[i]) - 1
+                while low <= high:
                     mid = (high + low) // 2
-                    if arr[mid] < inserted:
+                    if MergeHeap.values[i][mid].get_val() < inserted:
                         low = mid + 1
-                    elif arr[mid] > inserted:
+                    elif MergeHeap.values[i][mid].get_val() > inserted:
                         high = mid - 1
                     else:
                         return
+                i = i + 1
         if temp is None:
             # Self is empty.
-            self.head = IntNode.IntNode(inserted, None)
-            self.tail = self.head
-            self.values[0].append(inserted)
+            self.head = Node.Node(inserted, None)
+            if MergeHeap.mode != 1:
+                MergeHeap.values.append([self.head])
+                self.min = self.get_head().get_val()
         else:
             if temp.get_val() >= inserted:
-                # Self can be placed as head.
-                self.head = IntNode.IntNode(inserted, temp)
-                if MergeHeap.mode != 1 and self.sub_heaps != []:
-                    self.sub_heaps[0] = self.head
+                # Inserted can be placed as head.
+                self.head = Node.Node(inserted, temp)
+                if MergeHeap.mode == 3:
+                    MergeHeap.values[len(MergeHeap.values) - self.num_of_sub_heaps] = \
+                        [self.head] + MergeHeap.values[len(MergeHeap.values) - self.num_of_sub_heaps]
+                if MergeHeap.mode == 2:
+                    MergeHeap.values[len(MergeHeap.values) - self.num_of_sub_heaps] = [self.head]
+                if MergeHeap.mode != 1 and self.min > self.head.get_val():
+                    self.min = self.head.get_val()
             else:
-                if MergeHeap.mode == 1 or self.sub_heaps == []:
+                if MergeHeap.mode == 1 or self.num_of_sub_heaps == 1:
                     while (temp.get_next() is not None) and (temp.get_next().get_val() < inserted):
                         # Searches correct insert position.
                         count += 1
                         temp = temp.get_next()
-                    node = IntNode.IntNode(inserted, temp.get_next())
-                    temp.set_next(node)  # Puts inserted to correct position (in the last two lines).
-                    if (node.get_next() is None) and MergeHeap.mode != 1:
-                        self.tail = node
+                    node = Node.Node(inserted, temp.get_next())
+                    temp.set_next(node)  # Puts inserted to correct position (in the last two lines)
+                    if MergeHeap.mode == 3:
+                        self.values[len(self.values) - self.num_of_sub_heaps][0: count + 1] += \
+                            [node] + self.values[0][count + 1:]
                 else:
                     # Else, put inserted to a valid place in the first sub-heap.
-                    end_node = self.sub_heaps[1]
+                    end_node = MergeHeap.values[len(MergeHeap.values) - self.num_of_sub_heaps + 1][0]
                     while (temp.get_next() != end_node) and (temp.get_next().getval() < inserted):
                         # Searches correct place.
                         count += 1
                         temp = temp.get_next()
-                    node = IntNode.IntNode(inserted, temp.get_next())
+                    node = Node.Node(inserted, temp.get_next())
                     temp.set_next(node)  # Puts inserted to correct position.
-                    if temp == end_node:
-                        self.sub_heaps[1] = node
-                        self.tail = node
-            self.values[0][0: count + 1] += [inserted] + [self.values[0][count + 1:]]
-
+                    if MergeHeap.mode == 3:
+                        self.values[len(self.values) - self.num_of_sub_heaps][0: count + 1] += \
+                            [inserted] + [self.values[0][count + 1:]]
 
     def union(self, merge_heap):
         """Unions self and merge_heap and saves the result in self."""
@@ -124,15 +132,16 @@ class MergeHeap(LinkedList.LinkedList):
                         j = temp
                     else:
                         i = i.get_next()
-        else:
-            if len(self.sub_heaps) == 0:
-                self.sub_heaps.append(self.head)
-                self.sub_heaps.append(self.tail)
-            self.tail.set_next(merge_heap.get_head())
-            self.sub_heaps.append(merge_heap.get_head())
-            self.sub_heaps.append(merge_heap.tail)
-            self.tail = merge_heap.tail
-            # Last two lines can be problematic because of access rights, should be checked.
+            else:
+                if len(self.sub_heaps) == 0:
+                    self.sub_heaps.append(self.head)
+                    self.sub_heaps.append(self.tail)
+                # Here lies a huge problem, you can't extend the list in O(1), an Linked will have to replace
+                # self.sub_heap for that manner.
+                self.tail.set_next(merge_heap.get_head())
+                self.sub_heaps.append(merge_heap.get_head())
+                self.sub_heaps.append(merge_heap.tail)
+                # Last two lines can be problematic because of access rights, should be checked.
 
     def extract_min(self):
         """Extracts the minimal value's Node out of self."""
