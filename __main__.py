@@ -50,7 +50,7 @@ def execute(command, txt_mode, wait, command_list, *args):
         args = tuple(temp_list)
 
     if command == "ExtractMin":
-        args[0].extract_min()
+        args[len(args) - 1].extract_min()
 
     if command == "Minimum":
         print("The minimum is: " + args[0].get_head().get_val() + "/n")
