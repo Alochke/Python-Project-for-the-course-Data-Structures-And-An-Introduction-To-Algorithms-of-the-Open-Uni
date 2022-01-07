@@ -28,6 +28,6 @@ class LinkedList:
         """Print self."""
         temp = self.head
         while temp is not None:
-            print(temp.get_val() + " --> ")
+            print(str(temp.get_val()) + " --> ", end= "")
             temp = temp.get_next()
         print('None')

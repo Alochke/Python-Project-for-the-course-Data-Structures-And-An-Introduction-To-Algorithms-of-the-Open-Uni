@@ -46,12 +46,12 @@ class MergeHeap(LinkedList.LinkedList):
                     self.sub_heaps[0] = self.head
             else:
                 if MergeHeap.mode == 1 or self.sub_heaps == []:
-                    while (temp.get_next() is not None) and (temp.get_next().getval() < inserted):
+                    while (temp.get_next() is not None) and (temp.get_next().get_val() < inserted):
                         # Searches correct insert position.
                         temp = temp.get_next()
                     node = IntNode.IntNode(inserted, temp.get_next())
                     temp.set_next(node)  # Puts inserted to correct position (in the last two lines).
-                    if node.get_next() is None:
+                    if (node.get_next() is None) and MergeHeap.mode != 1:
                         self.tail = node
                 else:
                     # Else, put inserted to a valid place in the first sub-heap.
@@ -63,15 +63,15 @@ class MergeHeap(LinkedList.LinkedList):
                     temp.set_next(node)  # Puts inserted to correct position.
                     if temp == end_node:
                         self.sub_heaps[1] = node
+                        self.tail = node
 
     def union(self, merge_heap):
         """Unions self and merge_heap and saves the result in self."""
-        if MergeHeap.mode == 1:
-            # If merge_heap is empty, no action is needed.
-            if merge_heap.get_head() is not None:
-                if self.get_head() is None:
-                    self.set_head(merge_heap.get_head())
-                    return
+        if self.get_head() is None:
+            self.set_head(merge_heap.get_head())
+            return
+        if merge_heap.get_head() is not None:
+            if MergeHeap.mode == 1:
                 i = self.get_head()
                 j = merge_heap.get_head()
                 if j.get_val() < i.get_val():
@@ -87,7 +87,7 @@ class MergeHeap(LinkedList.LinkedList):
                 while True:
                     if (j.get_next() is None) or (i.get_next() is None):
                         if i.set_next is not None:
-                            j.set_next(i.get_next())
+                            i = self.tail
                         i.set_next(j)
                         return
                     if j.get_val() < i.get_next.get_val():
@@ -103,6 +103,15 @@ class MergeHeap(LinkedList.LinkedList):
                         j = temp
                     else:
                         i = i.get_next()
+        else:
+            if len(self.sub_heaps) == 0:
+                self.sub_heaps.append(self.head)
+                self.sub_heaps.append(self.tail)
+            self.tail.set_next(merge_heap.get_head())
+            self.sub_heaps.append(merge_heap.get_head())
+            self.sub_heaps.append(merge_heap.tail)
+            self.tail = merge_heap.tail
+            # Last two lines can be problematic because of access rights, should be checked.
 
     def extract_min(self):
         """Extracts self.head without returning it while keeping self a mergeable heap by definition."""

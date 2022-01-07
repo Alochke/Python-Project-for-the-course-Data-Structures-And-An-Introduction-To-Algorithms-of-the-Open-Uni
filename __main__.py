@@ -24,7 +24,7 @@ def execute(command, txt_mode, wait, command_list, *args):
 
     if command[0] == "I":
         # Insert was chosen.
-        args[args].insert(int(command[7: len(command)]))
+        args[len(args) - 1].insert(int(command[7: len(command)]))
 
     if command == "Union":
         # Note: List constructor take O(מ), but so does linear printing and Shay Tavor wrote in the forums
@@ -36,9 +36,10 @@ def execute(command, txt_mode, wait, command_list, *args):
 
     if command == "FromTxt":
         print("Please type the path to the location of the txt file you wish to run commands from. \n"
-              r"(for example:C:\Users\Alon\PycharmProjects\test.txt)")
+              r"(for example:C:\Users\Alon\PycharmProjects\commands)")
         txt = open(input()).readlines()
-        for i in range(len(txt)):
+        for i in range(len(txt) - 2):
+            # Last line is saved to txt priorly to the loop without "/n"
             txt[i] = txt[i][0: len(txt[i]) - 1]
         txt.reverse()
         execute(txt.pop(), True, True, txt, *args)
@@ -56,17 +57,18 @@ def execute(command, txt_mode, wait, command_list, *args):
 
     clear_console()
     print_iterable(args)
+    print("")
 
     if not txt_mode:
         guide_user()
         execute(input(), False, False, None, *args)
 
     if wait:
-        sleep(5)
         # Nitay, I leave the skip related dialog and code here for you because you said you have a good idea
         # for implementation.
+        pass
 
-    execute(command_list.pop(), len(command_list) == 0, wait, command_list, *args)
+    execute(command_list.pop(), len(command_list) != 0, wait, command_list, *args)
 
 
 def clear_console():
@@ -81,8 +83,6 @@ def print_iterable(iterable):
     """Print the given iterable object constructed of MergeHeaps."""
     for heap in iterable:
         heap.print_list()
-        print("\n")
-    print("\n")
 
 
 def guide_user():
@@ -94,7 +94,7 @@ def guide_user():
 if __name__ == "__main__":
     print("Please decide in which form are you to input the data \n 1 - for sorted lists \n 2 - for un-sorted lists "
           "\n 3 - for un-sorted, disjointed lists.")
-    MergeHeap.MergeHeap.set_mode(input())
+    MergeHeap.MergeHeap.set_mode(int(input()))
     clear_console()
     guide_user()
     execute(input(), False, False, None)
