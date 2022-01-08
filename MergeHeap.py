@@ -23,6 +23,7 @@ class MergeHeap(LinkedList.LinkedList):
         Create a new MergeHeap and if mode suggests doing so, add to the constructed the appropriate instance
         variables.
         """
+
         super().__init__(to_be_head)
         if MergeHeap.mode != 1:
             self.min = self.get_head().get_val() if to_be_head is not None else sys.maxsize
