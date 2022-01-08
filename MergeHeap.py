@@ -106,6 +106,7 @@ class MergeHeap(LinkedList.LinkedList):
                 if j.get_val() < i.get_val():
                     # Adding the part of merge_heap which should come before the previous head of self.
                     self.head = merge_heap.get_head()
+                    self.min = merge_heap.get_head().get_val()
                     while (j.get_next() is not None) and (j.get_next().get_val() < i.get_val()):
                         j = j.get_next()
                     temp = j.get_next()  # Save the next value of j in temp, so we could set j.next to i.
@@ -114,16 +115,18 @@ class MergeHeap(LinkedList.LinkedList):
                     if j is None:
                         return
                 while True:
+                    # The loop goes through self and fits merege_heap's nodes in their place by order.
                     if (j.get_next() is None) or (i.get_next() is None):
-                        if i.set_next is not None:
-                            i = self.tail
+                        if i.get_next() is not None:
+                            # Making sure the nodes to right of i, will stay in self.
+                            j.set_next(i.get_next())
                         i.set_next(j)
                         return
-                    if j.get_val() < i.get_next.get_val():
+                    if j.get_val() < i.get_next().get_val():
                         temp = i.get_next()  # Save the next value of i to temp, so we can resign i.next.
                         i.set_next(j)
                         i = temp
-                        while j.get_next is not None and j.get_next().getval() < temp.getval():
+                        while j.get_next() is not None and j.get_next().get_val() < temp.get_val():
                             j = j.get_next()
                         temp = j.get_next()
                         j.set_next(i)

@@ -66,7 +66,6 @@ def execute(command, txt_mode, wait, command_list, *args):
     if wait:
         pass
 
-
     execute(command_list.pop(), len(command_list) != 0, wait, command_list, *args)
 
 
