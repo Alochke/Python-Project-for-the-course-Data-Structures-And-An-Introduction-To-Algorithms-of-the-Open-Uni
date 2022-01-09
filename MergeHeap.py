@@ -28,8 +28,9 @@ class MergeHeap(LinkedList.LinkedList):
         if MergeHeap.mode != 1:
             self.min = self.get_head().get_val() if to_be_head is not None else sys.maxsize
             if to_be_head is not None:
+                self.tail = self.head
                 MergeHeap.values.append([self.head])
-            self.num_of_sub_heaps = 1
+            self.num_of_sub = 1
 
     @classmethod
     def set_mode(cls, to_be_mode):
@@ -42,7 +43,7 @@ class MergeHeap(LinkedList.LinkedList):
         temp = self.head
         if MergeHeap.mode == 3:
             i = 0
-            while i < len(MergeHeap.values) - self.num_of_sub_heaps:
+            while i < len(MergeHeap.values) - self.num_of_sub:
                 low = 0
                 high = len(MergeHeap.values[i]) - 1
                 while low <= high:
@@ -58,6 +59,7 @@ class MergeHeap(LinkedList.LinkedList):
             # Self is empty.
             self.head = Node.Node(inserted, None)
             if MergeHeap.mode != 1:
+                self.tail = self.head
                 MergeHeap.values.append([self.head])
                 self.min = self.get_head().get_val()
         else:
@@ -65,26 +67,28 @@ class MergeHeap(LinkedList.LinkedList):
                 # Inserted can be placed as head.
                 self.head = Node.Node(inserted, temp)
                 if MergeHeap.mode == 3:
-                    MergeHeap.values[len(MergeHeap.values) - self.num_of_sub_heaps] = \
-                        [self.head] + MergeHeap.values[len(MergeHeap.values) - self.num_of_sub_heaps]
+                    MergeHeap.values[len(MergeHeap.values) - self.num_of_sub] = \
+                        [self.head] + MergeHeap.values[len(MergeHeap.values) - self.num_of_sub]
                 if MergeHeap.mode == 2:
-                    MergeHeap.values[len(MergeHeap.values) - self.num_of_sub_heaps] = [self.head]
+                    MergeHeap.values[len(MergeHeap.values) - self.num_of_sub] = [self.head]
                 if MergeHeap.mode != 1 and self.min > self.head.get_val():
                     self.min = self.head.get_val()
             else:
-                if MergeHeap.mode == 1 or self.num_of_sub_heaps == 1:
+                if MergeHeap.mode == 1 or self.num_of_sub == 1:
                     while (temp.get_next() is not None) and (temp.get_next().get_val() < inserted):
                         # Searches correct insert position.
                         count += 1
                         temp = temp.get_next()
                     node = Node.Node(inserted, temp.get_next())
                     temp.set_next(node)  # Puts inserted to correct position (in the last two lines)
+                    if node.get_next() is None:
+                        self.tail = node
                     if MergeHeap.mode == 3:
-                        self.values[len(self.values) - self.num_of_sub_heaps][0: count + 1] += \
+                        self.values[len(self.values) - self.num_of_sub][0: count + 1] += \
                             [node] + self.values[0][count + 1:]
                 else:
                     # Else, put inserted to a valid place in the first sub-heap.
-                    end_node = MergeHeap.values[len(MergeHeap.values) - self.num_of_sub_heaps + 1][0]
+                    end_node = MergeHeap.values[len(MergeHeap.values) - self.num_of_sub + 1][0]
                     while (temp.get_next() != end_node) and (temp.get_next().getval() < inserted):
                         # Searches correct place.
                         count += 1
@@ -92,13 +96,18 @@ class MergeHeap(LinkedList.LinkedList):
                     node = Node.Node(inserted, temp.get_next())
                     temp.set_next(node)  # Puts inserted to correct position.
                     if MergeHeap.mode == 3:
-                        self.values[len(self.values) - self.num_of_sub_heaps][0: count + 1] += \
-                            [inserted] + [self.values[0][count + 1:]]
+                        self.values[len(self.values) - self.num_of_sub][0: count + 1] += \
+                            [node] + [self.values[0][count + 1:]]
 
     def union(self, merge_heap):
         """Unions self and merge_heap and saves the result in self."""
         if self.get_head() is None:
             self.set_head(merge_heap.get_head())
+            if MergeHeap.mode != 1:
+                self.num_of_sub = merge_heap.num_of_sub
+                if merge_heap.get_head is not None:
+                    self.min = merge_heap.min
+                    self.tail = merge_heap.tail
             return
         if merge_heap.get_head() is not None:
             if MergeHeap.mode == 1:
@@ -137,15 +146,11 @@ class MergeHeap(LinkedList.LinkedList):
                     else:
                         i = i.get_next()
             else:
-                if len(self.sub_heaps) == 0:
-                    self.sub_heaps.append(self.head)
-                    self.sub_heaps.append(self.tail)
-                # Here lies a huge problem, you can't extend the list in O(1), an Linked will have to replace
-                # self.sub_heap for that manner.
                 self.tail.set_next(merge_heap.get_head())
-                self.sub_heaps.append(merge_heap.get_head())
-                self.sub_heaps.append(merge_heap.tail)
-                # Last two lines can be problematic because of access rights, should be checked.
+                self.num_of_sub = self.num_of_sub + merge_heap.num_of_sub
+                self.tail = merge_heap.tail
+                if self.min > merge_heap.min:
+                    self.min = merge_heap.min
 
     def extract_min(self):
         """Extracts the minimal value's Node out of self."""

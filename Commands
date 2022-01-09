@@ -1,0 +1,20 @@
+MakeHeap
+Insert -4161221
+Insert -15795536
+Insert 43643450
+Insert 44153033
+Insert 41836783
+MakeHeap
+Insert -8014898
+MakeHeap
+Insert 36668236
+Union
+MakeHeap
+Insert -7204784
+Insert 25186585
+Union
+MakeHeap
+Insert 28764610
+Insert 14073775
+Insert -24463460
+Union
