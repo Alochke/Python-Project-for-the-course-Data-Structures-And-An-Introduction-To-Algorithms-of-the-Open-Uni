@@ -85,8 +85,7 @@ class MergeHeap(LinkedList.LinkedList):
                     if node.get_next() is None:
                         self.tail = node
                     if MergeHeap.mode == 3:
-                        self.values[len(self.values) - self.num_of_sub][0: count + 1] += \
-                            [node] + self.values[0][count + 1:]
+                        self.values[len(self.values) - self.num_of_sub][0: count + 1] += [node]
                 else:
                     # Else, put inserted to a valid place in the first sub-heap.
                     end_node = MergeHeap.values[len(MergeHeap.values) - self.num_of_sub + 1][0]
@@ -97,8 +96,7 @@ class MergeHeap(LinkedList.LinkedList):
                     node = Node.Node(inserted, temp.get_next())
                     temp.set_next(node)  # Puts inserted to correct position.
                     if MergeHeap.mode == 3:
-                        self.values[len(self.values) - self.num_of_sub][0: count + 1] += \
-                            [node] + [self.values[0][count + 1:]]
+                        self.values[len(self.values) - self.num_of_sub][0: count + 1] += [node]
 
     def union(self, merge_heap):
         """Unions self and merge_heap and saves the result in self."""

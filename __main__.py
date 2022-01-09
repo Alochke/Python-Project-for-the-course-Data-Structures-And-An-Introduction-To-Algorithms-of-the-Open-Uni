@@ -37,12 +37,13 @@ def execute(command, txt_mode, wait, command_list, *args):
     if command == "FromTxt":
         print("Please type the path to the location of the txt file you wish to run commands from. \n"
               r"(for example:C:\Users\Alon\PycharmProjects\commands)")
-        txt = open(input()).readlines()
-        for i in range(len(txt) - 1):
-            # Last line is saved to txt priorly to the loop without "/n"
-            txt[i] = txt[i][0: len(txt[i]) - 1]
-        txt.reverse()
-        execute(txt.pop(), True, True, txt, *args)
+        with open(input()) as file:
+            txt = file.readlines()
+            for i in range(len(txt) - 1):
+                # Last line is saved to txt priorly to the loop without "/n"
+                txt[i] = txt[i][0: len(txt[i]) - 1]
+            txt.reverse()
+            execute(txt.pop(), True, True, txt, *args)
 
     if command == "MakeHeap":
         temp_list = list(args)
