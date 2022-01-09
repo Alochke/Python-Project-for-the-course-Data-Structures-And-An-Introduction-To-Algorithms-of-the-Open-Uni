@@ -27,6 +27,7 @@ class MergeHeap(LinkedList.LinkedList):
         super().__init__(to_be_head)
         if MergeHeap.mode != 1:
             self.min = self.get_head().get_val() if to_be_head is not None else sys.maxsize
+            self.tail = to_be_head
             if to_be_head is not None:
                 self.tail = self.head
                 MergeHeap.values.append([self.head])
@@ -43,7 +44,7 @@ class MergeHeap(LinkedList.LinkedList):
         temp = self.head
         if MergeHeap.mode == 3:
             i = 0
-            while i < len(MergeHeap.values) - self.num_of_sub:
+            while i < len(MergeHeap.values) - self.num_of_sub + 1:
                 low = 0
                 high = len(MergeHeap.values[i]) - 1
                 while low <= high:
@@ -154,33 +155,35 @@ class MergeHeap(LinkedList.LinkedList):
 
     def extract_min(self):
         """Extracts the minimal value's Node out of self."""
-        if MergeHeap.mode == 1 or len(self.sub_heaps) == 0:
+        if MergeHeap.mode == 1 or self.num_of_sub == 1:
             if self.head == self.tail:
                 self.tail = None
+            MergeHeap.values[0].pop(0)
+            if len(MergeHeap.values[0]) == 0:
+                MergeHeap.values.pop(0)
             self.head = self.head.get_next()
         else:
-            min = len(self.sub_heaps) - 1
-            for i in range(int((len(self.sub_heaps) - 1) / 2)):
-                if self.sub_heaps[i * 2].get_val() < self.sub_heaps[min].get_val():
-                    min = i
-            if self.sub_heaps[min] == self.get_head():
-                # Correction, if needed, of self.get_head().
-                self.set_head(self.get_head().get_next())
-            if self.sub_heaps[min] == self.tail:
-                # Correction, if needed, of self.tail.
-                if len(self.sub_heaps) == 2:
-                    self.tail = None
-                else:
-                    # Notice it can't be min = 0, because if it was, len(self.sub_heaps) == 2, because self's previous
-                    # head is self's tail. So the line below is valid.
-                    self.tail = self.sub_heaps[min - 1]
-            if self.sub_heaps[min] == self.sub_heaps[min + 1]:
-                # Correction, if needed, of self.sub_heaps (because the sub-heap of the minimum will be deleted.).
-                self.sub_heaps.pop(min)
-                self.sub_heaps.pop(min)
-            else:
-                # Correct the representation of the sub-heap of the minimum in self.sub_heap.
-                self.sub_heaps[min] = self.sub_heaps[min].get_next()
-            if min != 0:
-                # As long as the extracted was not self's head, the actual list was not adjusted yet.
-                self.sub_heaps[min - 1].set_next(self.sub_heaps[min])
+            min = Node.Node(sys.maxsize, None)
+            for i in range(len(MergeHeap.values) - self.num_of_sub, len(MergeHeap.values)):
+                temp_min = MergeHeap[i][0]
+                second_min = MergeHeap[i][0]
+                if temp_min.get_val() < min.get_val():
+                    min = temp_min
+                    temp_index = i
+                    second_min = temp_min
+
+            MergeHeap.values[temp_index].pop(0)
+            if temp_index == len(MergeHeap.values) - self.num_of_sub:
+                self.head = self.head.get_next()
+
+            if len(MergeHeap.values[i]) == 0:
+                MergeHeap.values.pop(i)
+                self.num_of_sub -= 1
+                if temp_index == len(MergeHeap.values) - 1:
+                    self.tail = MergeHeap.values[i - 1][len(MergeHeap.values[i - 1])]
+
+            self.min = second_min
+            return min
+
+
+
