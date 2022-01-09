@@ -1,22 +1,20 @@
 MakeHeap
-Insert -4161221
-Insert -15795536
-Insert 43643450
-Insert 44153033
-Insert 41836783
+Insert 45
 MakeHeap
-Insert -8014898
-MakeHeap
-Insert 36668236
+Insert 79
 Union
 MakeHeap
-Insert -7204784
-Insert 25186585
+Insert 35
+Insert 15
 Union
 MakeHeap
-Insert 28764610
-Insert 14073775
-Insert -24463460
-Union
+Insert 90
+Insert 73
+Insert 97
 MakeHeap
+Insert 48
+Insert 34
+Insert 98
+Insert 75
+Insert 48
 Union
