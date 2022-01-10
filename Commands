@@ -1,20 +1,22 @@
 MakeHeap
-Insert 45
+Insert 6
 MakeHeap
-Insert 79
+Insert 8
 Union
 MakeHeap
-Insert 35
-Insert 15
+Insert 7
+Insert 1
 Union
 MakeHeap
-Insert 90
-Insert 73
-Insert 97
+Insert 2
+Insert 9
+Insert 2
 MakeHeap
-Insert 48
-Insert 34
-Insert 98
-Insert 75
-Insert 48
+Insert 6
+Insert 6
+Insert 10
+Insert 1
+Insert 2
 Union
+ExtractMin
+ExtractMin
