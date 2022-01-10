@@ -24,6 +24,7 @@ def execute(command, txt_mode, wait, command_list, *args):
 
     if command[0] == "I":
         # Insert was chosen.
+
         args[len(args) - 1].insert(int(command[7: len(command)]))
 
     if command == "Union":

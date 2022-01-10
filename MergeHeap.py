@@ -16,7 +16,7 @@ class MergeHeap(LinkedList.LinkedList):
     The value 3 is for un-sorted, disjointed lists.
     """
     mode = None
-    values = []
+    values = [] #
 
     def __init__(self, to_be_head):
         """
@@ -42,9 +42,9 @@ class MergeHeap(LinkedList.LinkedList):
 
     def insert(self, inserted):
         """Inserts inserted to self."""
-        count = 0
+        count = 0 #counter to find the right spot of the inserted value in the values array
         temp = self.head
-        if MergeHeap.mode == 3:
+        if MergeHeap.mode == 3: #Binary searching if the value was already inserted to one of the MergeHeaps
             i = 0
             while i < (len(MergeHeap.values) if self.get_head() is None else len(MergeHeap.values) - self.num_of_sub):
                 low = 0
@@ -96,6 +96,7 @@ class MergeHeap(LinkedList.LinkedList):
                                     [MergeHeap.values[len(MergeHeap.values) - 1][0]] + [node]
                         if self.mode == 3:
                             MergeHeap.values[len(MergeHeap.values) - self.num_of_sub][0: count + 1] += [node]
+
                 else:
                     # Else, put inserted to a valid place in the first sub-heap.
                     end_node = MergeHeap.values[len(MergeHeap.values) - self.num_of_sub + 1][0]
@@ -181,17 +182,14 @@ class MergeHeap(LinkedList.LinkedList):
 
         else:
             second_min = sys.maxsize
+            min = Node.Node(sys.maxsize, None)
+            min_index = 0
             for i in range(len(MergeHeap.values) - self.num_of_sub, len(MergeHeap.values)):
                 temp_min = MergeHeap.values[i][0]
-                if temp_min.get_val() == self.min:
+                if temp_min.get_val() < min.get_val():
                     min = temp_min
                     min_index = i
-                    if temp_min.get_next() is not None and \
-                            (len(MergeHeap.values) - 1 == i or temp_min.get_next() != MergeHeap.values[i + 1][0]) \
-                            and temp_min.get_next().get_val() < second_min:
-                        second_min = min.get_next().get_val()
-                elif temp_min.get_val() < second_min:
-                    second_min = temp_min.get_val()
+                    second_min = min
 
             if self.get_head() == min:
                 # min is the head of self.
@@ -216,5 +214,7 @@ class MergeHeap(LinkedList.LinkedList):
                     self.num_of_sub -= 1
             if len(MergeHeap.values) == min_index:
                 self.tail = MergeHeap.values[min_index - 1][len(MergeHeap.values[min_index - 1]) - 1]
-
             self.min = second_min
+
+    def Minimum(self):
+        return self.min
