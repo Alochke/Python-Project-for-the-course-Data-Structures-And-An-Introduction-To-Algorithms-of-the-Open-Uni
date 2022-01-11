@@ -5,7 +5,6 @@ commands.
 Also, The module stores the functions which the main function utilizes but don't belong logically to a certain
 class.
 """
-from time import sleep
 import MergeHeap
 import os
 
@@ -22,7 +21,7 @@ def execute(command, txt_mode, wait, command_list, *args):
 
     """
 
-    if command[0] == "I":
+    if command[:1] == "I":
         # Insert was chosen.
         args[len(args) - 1].insert(int(command[7: len(command)]))
 
@@ -35,8 +34,8 @@ def execute(command, txt_mode, wait, command_list, *args):
         args = tuple(temp_list)
 
     if command == "FromTxt":
-        print("Please type the path to the location of the txt file you wish to run commands from. \n"
-              r"(for example:C:\Users\Alon\PycharmProjects\commands)")
+        print("Please type the path to the location of the txt file you wish to run commands from, "
+              "without the .txt ending. \n" + r"(for example:C:\Users\Alon\PycharmProjects\commands)")
         with open(input()) as file:
             txt = file.readlines()
             for i in range(len(txt) - 1):
@@ -53,19 +52,20 @@ def execute(command, txt_mode, wait, command_list, *args):
     if command == "ExtractMin":
         args[len(args) - 1].extract_min()
 
-    if command == "Minimum":
-        print("The minimum is: " + args[0].get_head().get_val() + "/n")
-
     clear_console()
     print_iterable(args)
     print("")
+
+    if command == "Minimum":
+        print("The minimum is: " + str(args[len(args) - 1].minimum()) + "\n")
 
     if not txt_mode:
         guide_user()
         execute(input(), False, False, None, *args)
 
     if wait:
-        pass
+        print('To skip to the end-result type "skip", for the next step press enter:')
+        wait = (input() != "skip")
 
     execute(command_list.pop(), len(command_list) != 0, wait, command_list, *args)
 

@@ -9,7 +9,7 @@ class Node:
     """
 
     def __init__(self, to_be_val, to_be_next):
-        """Construct a Node and set self.next to to_be_next, self.val to to_be_val."""
+        """Construct a Node and set self.next to to_be_next, and self.val to to_be_val."""
         self.next = to_be_next
         self.val = to_be_val
 
