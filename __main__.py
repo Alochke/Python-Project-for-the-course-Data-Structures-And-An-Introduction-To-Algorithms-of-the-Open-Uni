@@ -22,13 +22,14 @@ def execute(command, txt_mode, wait, command_list, *args):
     """
 
     if command[:1] == "I":
-        # Insert was chosen.
+        # Insert was chosen, inserting the value chosen to the last Mergeheap in the args
         args[len(args) - 1].insert(int(command[7: len(command)]))
 
     if command == "Union":
         # Note: List constructor take O(n), but so does linear printing and Shay Tavor wrote in the forums
         # that the second of both is valid and the algorithms by in MergeHeap.py support our claims for
         # time-complexity and this should be explained.
+        # uniting last 2 MergeHeaps in the args
         temp_list = list(args)
         temp_list[len(temp_list) - 2].union(temp_list.pop())
         args = tuple(temp_list)
@@ -37,19 +38,23 @@ def execute(command, txt_mode, wait, command_list, *args):
         print("Please type the path to the location of the txt file you wish to run commands from, "
               "without the .txt ending. \n" + r"(for example:C:\Users\Alon\PycharmProjects\commands)")
         with open(input()) as file:
+            # opening the path chosen
             txt = file.readlines()
             for i in range(len(txt) - 1):
                 # Last line is saved to txt priorly to the loop without "/n"
                 txt[i] = txt[i][0: len(txt[i]) - 1]
             txt.reverse()
+            # executing each line in the text file
             execute(txt.pop(), True, True, txt, *args)
 
     if command == "MakeHeap":
+        # adding the new empty heap to the args list
         temp_list = list(args)
         temp_list.append(MergeHeap.MergeHeap(None))
         args = tuple(temp_list)
 
     if command == "ExtractMin":
+        # extracting the minimum value from the MergeHeap handled at the moment.
         args[len(args) - 1].extract_min()
 
     clear_console()
@@ -57,9 +62,11 @@ def execute(command, txt_mode, wait, command_list, *args):
     print("")
 
     if command == "Minimum":
+        # printing the minimum value
         print("The minimum is: " + str(args[len(args) - 1].minimum()) + "\n")
 
     if not txt_mode:
+        # text mode is False, so continuing to ask for commands input
         guide_user()
         execute(input(), False, False, None, *args)
 
@@ -91,6 +98,7 @@ def guide_user():
 
 
 if __name__ == "__main__":
+    # starting the main
     print("Please decide in which form are you to input the data \n 1 - for sorted lists \n 2 - for un-sorted lists "
           "\n 3 - for un-sorted, disjointed lists.")
     MergeHeap.MergeHeap.set_mode(int(input()))

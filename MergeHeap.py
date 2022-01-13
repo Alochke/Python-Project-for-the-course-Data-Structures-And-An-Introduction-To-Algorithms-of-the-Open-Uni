@@ -112,7 +112,7 @@ class MergeHeap(LinkedList.LinkedList):
                     if MergeHeap.mode == 2 and node.get_next() == end_node:
                         MergeHeap.values[len(MergeHeap.values) - self.num_of_sub][1] = node
                     if MergeHeap.mode == 3:
-                        self.values[len(self.values) - self.num_of_sub][0: count + 1] += [node]
+                        MergeHeap.values[len(MergeHeap.values) - self.num_of_sub][0: count + 1] += [node]
 
     def union(self, merge_heap):
         """Unions self and merge_heap and saves the result in self."""
@@ -212,7 +212,7 @@ class MergeHeap(LinkedList.LinkedList):
             else:
                 # As long as min is not the head of self,
                 # must append min.get_next() to the nodes to the left of min.
-                self.values[min_index - 1][len(MergeHeap.values[min_index - 1]) - 1].set_next(min.get_next())
+                MergeHeap.values[min_index - 1][len(MergeHeap.values[min_index - 1]) - 1].set_next(min.get_next())
 
             if MergeHeap.mode == 2: # mode is 2, so values should be changed accordingly
                 # checking if min node was the only item in its sub heap.
