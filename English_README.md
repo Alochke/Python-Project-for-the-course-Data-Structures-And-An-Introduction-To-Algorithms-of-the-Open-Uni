@@ -12,5 +12,6 @@ in efficient time and space complexities, that were calculated by Alon Polsky of
 1. The lists will be sorted.
 2. The lists won't be sorted.
 3. The lists won't be sorted and will not have double appearances of the same key.
+
 After every command's execution the terminal displays a graphical presentation of the current form of the data structures that the terminal uses,
 and the terminal can be given a list of commands in the format of a txt file and preform them by order (but also can be given each commands separately of curse.).
