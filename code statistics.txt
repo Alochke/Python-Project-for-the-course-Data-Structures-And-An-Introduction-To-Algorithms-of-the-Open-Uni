@@ -1,0 +1,177 @@
+***Code statistics***
+Statistics measured in iterations. The main process considered to be one iteration, and when 
+a loop iteration runs, it is also counted.
+
+MergeHeap 1 = [21, 2, 7, 15, 3, 20, 16, 21, 28, 34, 1, 8, 30, 31, 1, 33, 14, 24, 16, 22, 19, 24, 20, 30, 11, 17, 32, 24, 29, 31, 1, 9, 8, 12, 5, 7, 12, 16, 29, 5, 6, 1, 32, 11, 22, 24, 12, 28, 24, 7, 12]
+Iterations taken building it:
+Mode 1 = 609 iterations
+Mode 2 = 609 iterations
+Mode 3 = 433 iterations
+--------------------------------------------
+MergeHeap 2 = [11, 4, 4, 4, 6, 21, 14, 9, 14, 11, 31, 19, 3, 15, 24, 26, 35, 16, 7, 15, 2, 13, 19, 28, 34, 18, 9, 33, 21, 28, 30, 6, 18, 9, 7, 33, 33, 30, 32, 11, 2, 8, 7, 33, 19, 27, 25, 20, 31, 13, 22]
+Iterations taken building it:
+Mode 1 = 766 iterations
+Mode 2 = 766 iterations
+Mode 3 = 499 iterations
+--------------------------------------------
+MergeHeap 3 = [3, 3, 2, 3, 31, 17, 18, 30, 8, 24, 5, 4, 19, 12, 31, 34, 2, 27, 1, 34, 26, 10, 18, 11, 18, 1, 28, 24, 13, 6, 19, 19, 10, 27, 10, 22, 15, 26, 4, 17, 34, 9, 18, 25, 25, 4, 4, 22, 32, 13, 1]
+Iterations taken building it:
+Mode 1 = 667 iterations
+Mode 2 = 667 iterations
+Mode 3 = 440 iterations
+--------------------------------------------
+MergeHeap 4 = [29, 25, 11, 24, 33, 19, 16, 9, 16, 12, 25, 18, 16, 1, 31, 8, 17, 2, 30, 1, 11, 7, 8, 4, 3, 20, 32, 26, 19, 8, 20, 18, 11, 27, 13, 21, 23, 14, 6, 32, 24, 34, 34, 35, 29, 32, 33, 33, 14, 28, 15]
+Iterations taken building it:
+Mode 1 = 756 iterations
+Mode 2 = 756 iterations
+Mode 3 = 528 iterations
+--------------------------------------------
+Merge Heap 5 = [32, 31, 5, 10, 21, 24, 25, 1, 22, 3, 19, 24, 32, 23, 2, 8, 30, 31, 10, 12, 6, 34, 8, 20, 9, 7, 17, 17, 21, 5, 30, 30, 29, 28, 25, 28, 28, 20, 28, 10, 21, 28, 1, 24, 24, 14, 30, 23, 12, 25, 1]
+Iterations taken building it:
+Mode 1 = 632 iterations
+Mode 2 = 632 iterations
+Mode 3 = 408 iterations
+--------------------------------------------
+Merge Heap 6 = [9, 34, 26, 31, 27, 4, 20, 11, 9, 6, 22, 32, 18, 13, 8, 17, 33, 24, 4, 18, 10, 9, 30, 13, 29, 19, 17, 25, 8, 9, 3, 19, 28, 4, 4, 28, 2, 4, 19, 10, 32, 34, 13, 11, 4, 28, 31, 1, 25, 16, 32]
+Iterations taken building it:
+Mode 1 = 596 iterations
+Mode 2 = 596 iterations
+Mode 3 = 411 iterations
+--------------------------------------------
+Merge Heap 7 = [20, 27, 21, 10, 9, 6, 13, 30, 8, 11, 33, 16, 30, 33, 32, 23, 4, 15, 12, 25, 31, 5, 10, 9, 8, 16, 25, 24, 18, 11, 23, 3, 26, 23, 35, 17, 26, 22, 1, 19, 21, 1, 15, 32, 31, 23, 33, 2, 25, 21, 23]
+Iterations taken building it:
+Mode 1 = 670 iterations
+Mode 2 = 670 iterations
+Mode 3 = 467 iterations
+--------------------------------------------
+Merge Heap 8 = [23, 18, 27, 25, 24, 20, 34, 5, 27, 35, 28, 16, 24, 25, 13, 16, 30, 35, 26, 3, 7, 27, 9, 17, 13, 27, 30, 29, 7, 14, 33, 27, 35, 35, 4, 34, 9, 1, 5, 25, 27, 16, 25, 22, 23, 15, 11, 21, 1, 22, 30]
+Iterations taken building it:
+Mode 1 = 562 iterations
+Mode 2 = 562 iterations
+Mode 3 = 392 iterations
+--------------------------------------------
+Merge Heap 9 = [2, 16, 12, 33, 34, 18, 16, 11, 2, 8, 32, 13, 3, 5, 24, 11, 13, 11, 14, 4, 5, 10, 19, 30, 5, 16, 1, 10, 31, 2, 27, 9, 24, 18, 34, 23, 21, 5, 1, 4, 22, 35, 19, 7, 9, 30, 13, 13, 8, 19, 24]
+Iterations taken building it:
+Mode 1 = 658 iterations
+Mode 2 = 658 iterations
+Mode 3 = 442 iterations
+--------------------------------------------
+Merge Heap 10  = [24, 31, 10, 4, 20, 5, 5, 2, 29, 29, 34, 2, 10, 23, 33, 15, 14, 12, 24, 15, 17, 27, 34, 10, 10, 19, 33, 21, 11, 4, 20, 23, 18, 30, 16, 29, 6, 31, 9, 35, 8, 33, 30, 22, 21, 32, 7, 7, 34, 19, 4]
+Iterations taken building it:
+Mode 1 = 679 iterations
+Mode 2 = 679 iterations
+Mode 3 = 459 iterations
+--------------------------------------------
+Merge Heap 11  = [7, 35, 34, 29, 32, 27, 13, 1, 11, 22, 13, 12, 18, 5, 27, 11, 7, 11, 27, 34, 33, 15, 29, 5, 33, 24, 20, 1, 27, 24, 6, 16, 7, 35, 35, 34, 34, 35, 9, 26, 25, 34, 30, 9, 28, 29, 10, 6, 18, 31, 27]
+Iterations taken building it:
+Mode 1 = 662 iterations
+Mode 2 = 662 iterations
+Mode 3 = 431 iterations
+--------------------------------------------
+Merge Heap 12  = [4, 10, 27, 25, 28, 20, 12, 7, 16, 25, 9, 32, 30, 19, 14, 6, 2, 15, 29, 10, 35, 8, 10, 26, 32, 17, 29, 10, 2, 29, 21, 2, 31, 27, 22, 17, 26, 4, 2, 26, 20, 30, 15, 24, 29, 10, 28, 23, 30, 31, 29]
+Iterations taken building it:
+Mode 1 = 716 iterations
+Mode 2 = 716 iterations
+Mode 3 = 473 iterations
+--------------------------------------------
+Merge Heap 13  = [13, 19, 30, 32, 25, 26, 2, 12, 24, 31, 18, 28, 22, 4, 22, 13, 6, 16, 2, 4, 26, 16, 33, 8, 29, 33, 3, 24, 4, 35, 27, 5, 20, 7, 34, 29, 8, 30, 13, 16, 10, 7, 24, 17, 8, 18, 10, 3, 31, 25, 10]
+Iterations taken building it:
+Mode 1 = 585 iterations
+Mode 2 = 585 iterations
+Mode 3 = 441 iterations
+--------------------------------------------
+Merge Heap 14  = [1, 19, 1, 22, 32, 28, 9, 31, 30, 33, 11, 16, 34, 30, 17, 4, 27, 29, 34, 32, 1, 14, 28, 5, 1, 12, 20, 13, 20, 2, 13, 6, 34, 13, 18, 9, 9, 10, 13, 14, 9, 29, 28, 23, 14, 16, 34, 19, 8, 19, 18]
+Iterations taken building it:
+Mode 1 = 596 iterations
+Mode 2 = 596 iterations
+Mode 3 = 397 iterations
+--------------------------------------------
+Merge Heap 15  = [12, 10, 5, 11, 34, 14, 21, 19, 14, 25, 23, 15, 17, 16, 27, 11, 21, 30, 16, 2, 34, 5, 8, 10, 15, 21, 3, 33, 5, 33, 28, 21, 24, 1, 35, 24, 22, 16, 4, 29, 32, 11, 35, 11, 1, 17, 14, 12, 1, 15, 24]
+Iterations taken building it:
+Mode 1 = 636 iterations
+Mode 2 = 636 iterations
+Mode 3 = 479 iterations
+--------------------------------------------
+Merge Heap 16  = [2, 35, 11, 20, 9, 27, 7, 6, 1, 8, 28, 10, 25, 22, 27, 35, 30, 13, 33, 5, 20, 26, 4, 3, 5, 12, 30, 14, 4, 30, 23, 14, 2, 21, 34, 18, 16, 25, 15, 35, 24, 30, 21, 35, 18, 19, 16, 27, 20, 14, 10]
+Iterations taken building it:
+Mode 1 = 694 iterations
+Mode 2 = 694 iterations
+Mode 3 = 521 iterations
+--------------------------------------------
+Merge Heap 17  = [18, 2, 10, 4, 9, 15, 19, 15, 2, 10, 21, 10, 3, 8, 2, 10, 3, 17, 11, 10, 5, 22, 8, 27, 3, 20, 30, 21, 10, 22, 5, 25, 16, 12, 22, 6, 6, 29, 32, 6, 13, 16, 5, 19, 18, 7, 23, 14, 19, 6, 24]
+Iterations taken building it:
+Mode 1 = 750 iterations
+Mode 2 = 750 iterations
+Mode 3 = 493 iterations
+--------------------------------------------
+Merge Heap 18  = [2, 4, 30, 34, 8, 26, 1, 23, 9, 23, 19, 10, 26, 10, 12, 11, 9, 7, 3, 2, 34, 32, 10, 13, 24, 24, 14, 28, 4, 20, 17, 17, 22, 1, 33, 19, 18, 6, 5, 4, 17, 26, 31, 8, 29, 18, 34, 13, 14, 12, 30]
+Iterations taken building it:
+Mode 1 = 692 iterations
+Mode 2 = 692 iterations
+Mode 3 = 498 iterations
+--------------------------------------------
+Merge Heap 19  = [27, 12, 22, 8, 3, 11, 19, 21, 3, 9, 19, 5, 28, 18, 33, 26, 32, 35, 4, 24, 15, 15, 32, 4, 13, 19, 33, 28, 5, 30, 32, 16, 1, 2, 10, 2, 10, 29, 22, 15, 20, 35, 13, 3, 11, 28, 22, 13, 5, 31, 27]
+Iterations taken building it:
+Mode 1 = 646 iterations
+Mode 2 = 646 iterations
+Mode 3 = 474 iterations
+--------------------------------------------
+Merge Heap 20  = [2, 22, 19, 5, 28, 21, 13, 26, 18, 30, 35, 29, 2, 15, 13, 25, 8, 25, 30, 22, 9, 19, 15, 29, 9, 7, 21, 4, 31, 32, 35, 32, 11, 10, 3, 19, 1, 32, 25, 9, 12, 22, 6, 7, 7, 18, 34, 23, 1, 25, 18]
+Iterations taken building it:
+Mode 1 = 591 iterations
+Mode 2 = 591 iterations
+Mode 3 = 434 iterations
+
+--------------------------------------------
+Merge Heap 13 united with Merge Heap 11:
+Iterations uniting it:
+Mode 1 = 76
+Mode 2 = 1
+Mode 3 = 1
+
+Iterations ExtractingMin:
+Mode 1 = 1
+Mode 2 = 3
+Mode 3 = 3
+
+--------------------------------------------
+Merge Heap 6 united with Merge Heap 17:
+Iterations uniting it:
+Mode 1 = 75
+Mode 2 = 1
+Mode 3 = 1
+
+Iterations ExtractingMin:
+Mode 1 = 1
+Mode 2 = 3
+Mode 3 = 3
+
+--------------------------------------------
+Merge Heap 14 united with Merge Heap 2:
+Iterations uniting them:
+Mode 1 = 81
+Mode 2 = 1
+Mode 3 = 1
+
+Iterations ExtractingMin:
+Mode 1 = 1
+Mode 2 = 3
+Mode 3 = 3
+--------------------------------------------
+Uniting Merge Heap 1, MergeHeap 3, MergeHeap 10, MergeHeap 12, MergeHeap 2:
+Iterations building them all at the same process:
+Mode 1 = 3437
+Mode 2 = 3437
+Mode 3 = 1937
+
+Iterations uniting them:
+Mode 1 = 598
+Mode 2 = 4
+Mode 3 = 4
+
+Iterations ExtractingMin:
+Mode 1 = 1
+Mode 2 = 6
+Mode 3 = 6
+
+
